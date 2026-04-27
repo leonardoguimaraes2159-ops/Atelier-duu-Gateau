@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atelier du Gateau | Receitas de Bolo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Fraunces:wght@600;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="brand-mark-monogram">A</span>
+            <span class="brand-mark-divider"></span>
+            <span class="brand-mark-monogram">G</span>
+          </span>
+          <div>
+            <strong class="brand-title">Atelier du Gateau</strong>
+            <p>Receitas de bolo para qualquer momento</p>
+          </div>
+        </div>
+        <button class="ghost-button" id="surpriseButton" type="button">Me surpreenda</button>
+      </nav>
+
+      <section class="hero-content">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Colecao especial</span>
+          <h1>Bolos fofinhos, recheados e faceis de fazer.</h1>
+          <p>
+            Explore receitas classicas e criativas, filtre por estilo e salve
+            suas favoritas para cozinhar depois.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#receitas" class="primary-button">Ver receitas</a>
+            <button class="secondary-button" id="showFavoritesButton" type="button">
+              Ver favoritas
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <article>
+              <strong id="recipeCount">0</strong>
+              <span>receitas</span>
+            </article>
+            <article>
+              <strong>15 a 70 min</strong>
+              <span>tempo medio</span>
+            </article>
+            <article>
+              <strong>4 estilos</strong>
+              <span>para explorar</span>
+            </article>
+          </div>
+        </div>
+
+        <aside class="featured-card reveal delay-1" id="featuredCard">
+          <p class="featured-label">Receita em destaque</p>
+          <h2 id="featuredTitle">Bolo de cenoura com cobertura de chocolate</h2>
+          <p id="featuredDescription">
+            Massa macia, cobertura brilhante e aquele clima de bolo de tarde.
+          </p>
+          <div class="featured-meta">
+            <span id="featuredCategory">Tradicional</span>
+            <span id="featuredTime">50 min</span>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="controls reveal delay-2" id="receitas">
+        <div class="search-card">
+          <label for="searchInput">Buscar receita</label>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Ex.: chocolate, laranja, festa..."
+          />
+        </div>
+
+        <div class="filter-card">
+          <span>Filtrar por categoria</span>
+          <div class="chip-group" id="categoryFilters"></div>
+        </div>
+      </section>
+
+      <section class="collection-band reveal delay-2">
+        <div class="section-heading compact-heading">
+          <div>
+            <span class="eyebrow">Colecoes</span>
+            <h2>Descubra por estilo</h2>
+          </div>
+          <p>Uma camada a mais para navegar melhor pelo catalogo.</p>
+        </div>
+        <div class="chip-group" id="collectionFilters"></div>
+      </section>
+
+      <section class="content-grid">
+        <section class="recipes-panel">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Catalogo</span>
+              <h2>Receitas selecionadas</h2>
+            </div>
+            <p id="resultsText">Carregando receitas...</p>
+          </div>
+
+          <div class="recipe-grid" id="recipeGrid"></div>
+          <div class="load-more-wrap">
+            <button class="secondary-button load-more-button hidden" id="loadMoreButton" type="button">
+              Ver mais receitas
+            </button>
+          </div>
+          <p class="empty-state hidden" id="emptyState">
+            Nenhuma receita encontrada com esse filtro.
+          </p>
+        </section>
+
+        <aside class="detail-panel reveal delay-3" id="detailPanel">
+          <span class="eyebrow">Modo preparo</span>
+          <h2 id="detailTitle">Selecione uma receita</h2>
+          <p id="detailDescription">
+            Clique em um card para ver ingredientes, tempo de preparo e etapas.
+          </p>
+
+          <div class="detail-meta" id="detailMeta">
+            <span>Categoria</span>
+            <span>Tempo</span>
+            <span>Porcoes</span>
+          </div>
+
+          <div class="detail-columns">
+            <div>
+              <h3>Ingredientes</h3>
+              <ul id="ingredientsList"></ul>
+            </div>
+            <div>
+              <h3>Passos</h3>
+              <ol id="stepsList"></ol>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer reveal">
+      <p>Leonardo Guimaraes Company</p>
+    </footer>
+  </div>
+
+  <div class="recipe-modal hidden" id="recipeModal" aria-hidden="true">
+    <div class="recipe-modal-backdrop" id="recipeModalBackdrop"></div>
+    <div class="recipe-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="recipe-modal-close" id="recipeModalClose" type="button" aria-label="Fechar detalhes">×</button>
+      <div class="recipe-modal-media" id="modalMedia"></div>
+      <div class="recipe-modal-content">
+        <span class="eyebrow">Receita completa</span>
+        <h2 id="modalTitle">Receita</h2>
+        <p id="modalDescription"></p>
+        <div class="detail-meta" id="modalMeta"></div>
+        <div class="detail-columns">
+          <div>
+            <h3>Ingredientes</h3>
+            <ul id="modalIngredients"></ul>
+          </div>
+          <div>
+            <h3>Passos</h3>
+            <ol id="modalSteps"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
